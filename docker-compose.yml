@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  control:
+    build: ./control
+    container_name: ansible-control
+    networks:
+      - ansible-net
+    volumes:
+      - ./playbooks:/playbooks
+
+  node-1:
+    build: ./node
+    container_name: node-1
+    privileged: true
+    networks:
+      - ansible-net
+
+  node-2:
+    build: ./node
+    container_name: node-2
+    privileged: true
+    networks:
+      - ansible-net
+
+  node-3:
+    build: ./node
+    container_name: node-3
+    privileged: true
+    networks:
+      - ansible-net
+
+networks:
+  ansible-net:
+    driver: bridge

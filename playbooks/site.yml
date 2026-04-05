@@ -1,0 +1,32 @@
+---
+- name: Configure web servers
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Start and enable nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+- name: Configure DB servers
+  hosts: dbservers
+  become: yes
+  tasks:
+    - name: Install postgresql
+      apt:
+        name: postgresql
+        state: present
+        update_cache: yes
+
+    - name: Start and enable postgresql
+      service:
+        name: postgresql
+        state: started
+        enabled: yes
